@@ -53,10 +53,9 @@ def fill():
     conn = sqlite3.connect('libreria.db')
     c = conn.cursor()
 
-    for x in libros:
-        c.execute("""
+    c.executemany("""
             INSERT INTO libro (titulo, pags, author)
-            VALUES(?,?,?);""", x)
+            VALUES(?,?,?);""", libros) #SE USA EXECUTEMANY PARA PASAR CADA FILA DE TUPLA
 
     conn.commit()
     conn.close()
